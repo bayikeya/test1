@@ -1,34 +1,80 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>複数画像切替付きスポット案内</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    body { margin: 0; overflow: hidden; background-color: #000; color: white; font-family: sans-serif; text-align: center; }
-    #camera { width: 100vw; height: 100vh; object-fit: cover; position: absolute; top: 0; left: 0; z-index: -1; }
-    #info {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding: env(safe-area-inset-top, 12px) 10px 10px;
-  background: rgba(0, 0, 0, 0.6);
-  border-radius: 0 0 10px 10px;
-  z-index: 1;
-  white-space: pre-wrap;
-  max-width: 100vw;
-  box-sizing: border-box;
-  text-align: left;
-}
-    #image { position: absolute; bottom: 180px; left: 50%; transform: translateX(-50%); width: 300px; height: 300px; object-fit: contain; display: none; z-index: 1; background: black; }
-    .btn { position: absolute; left: 50%; transform: translateX(-50%); background-color: #007BFF; color: white; border: none; padding: 10px 20px; font-size: 14px; border-radius: 8px; cursor: pointer; z-index: 2; display: none; }
+    body { 
+      margin: 0; 
+      overflow: hidden; 
+      background-color: #000; 
+      color: white; 
+      font-family: sans-serif; 
+      text-align: center; 
+    }
+    #camera { 
+      width: 100vw; 
+      height: 100vh; 
+      object-fit: cover; 
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      z-index: -1; 
+    }
+    #info { 
+      position: absolute; 
+      top: 10px; 
+      left: 10px; 
+      background: rgba(0,0,0,0.6); 
+      padding: 10px; 
+      border-radius: 8px; 
+      z-index: 1; 
+      white-space: pre-wrap; 
+    }
+    #image {
+      position: absolute;
+      bottom: 180px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;        /* ✅ 横幅を固定（例：300px） */
+      height: 300px;       /* ✅ 縦幅も固定 */
+      object-fit: contain; /* ✅ アスペクト比を保持しつつ中に収める */
+      display: none;
+      z-index: 1;
+      background: black;   /* 余白が目立たないように背景を黒くするなどもOK */
+    }
+    .btn { 
+      position: absolute; 
+      left: 50%; 
+      transform: translateX(-50%); 
+      background-color: #007BFF; 
+      color: white; 
+      border: none; 
+      padding: 10px 20px; 
+      font-size: 14px; 
+      border-radius: 8px; 
+      cursor: pointer; 
+      z-index: 2; 
+      display: none; 
+    }
     #playBtn { bottom: 120px; }
     #patternBtn { bottom: 70px; }
     #nextBtn { bottom: 20px; }
-    .img-nav { position: absolute; bottom: 260px; z-index: 2; font-size: 20px; background: rgba(0,0,0,0.5); color: white; border: none; padding: 5px 15px; cursor: pointer; border-radius: 6px; }
-    #prevBtn { left: 10%; display: none; }
-    #nextImgBtn { right: 10%; display: none; }
+    .img-nav { 
+      position: absolute; 
+      bottom: 260px; 
+      z-index: 2; 
+      font-size: 20px; 
+      background: rgba(0,0,0,0.5); 
+      color: white; 
+      border: none; 
+      padding: 5px 15px; 
+      cursor: pointer; 
+      border-radius: 6px; 
+    }
+    #prevBtn { left: 10%; }
+    #nextImgBtn { right: 10%; }
   </style>
 </head>
 <body>
@@ -160,7 +206,7 @@ function checkProximity(lat, lon) {
   const distance = getDistance(lat, lon, spot.lat, spot.lon);
   const range = spot.radius || 10;
 
- info.innerText =
+iinfo.innerText =
   `現在地: 緯度 ${lat.toFixed(6)}, 経度 ${lon.toFixed(6)}\n` +
   `次のスポット: ${spot.name}（${currentIndex + 1} / ${spots.length}）\n` +
   `残り距離: ${distance.toFixed(1)}m`;
