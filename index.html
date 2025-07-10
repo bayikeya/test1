@@ -160,7 +160,10 @@ function checkProximity(lat, lon) {
   const distance = getDistance(lat, lon, spot.lat, spot.lon);
   const range = spot.radius || 10;
 
- info.innerText = `現在地: 緯度 ${lat.toFixed(6)}, 経度 ${lon.toFixed(6)}\n次: ${spot.name}（残り${distance.toFixed(1)}m）`;
+ info.innerText =
+  `現在地: 緯度 ${lat.toFixed(6)}, 経度 ${lon.toFixed(6)}\n` +
+  `次のスポット: ${spot.name}（${currentIndex + 1} / ${spots.length}）\n` +
+  `残り距離: ${distance.toFixed(1)}m`;
 
   if (currentIndex >= 1 && !hasEnteredSpot && distance < range) {
     showSpot(spot);
