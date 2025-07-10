@@ -111,7 +111,7 @@ const spots = [
     name: "曲がり角右１",
     lat: 35.6933688901654,
     lon: 140.05042624826697,
-    radius: 15,
+    radius: 10,
     images: ["image3.jpeg", "image11.jpeg"],
     audio: { A: "spot3,4.ja.mp3", B: "spot3,4.en.mp3", C: "spot3,4.ch.mp3" }
   },
@@ -119,7 +119,7 @@ const spots = [
     name: "曲がり角右２",
     lat: 35.69384574273443,
     lon: 140.05039255315654,
-    radius: 15,
+    radius: 10,
     images: ["image4.jpeg", "image13.jpeg"],
     audio: { A: "spot3,4.ja.mp3", B: "spot3,4.en.mp3", C: "spot3,4.ch.mp3" }
   },
@@ -127,7 +127,7 @@ const spots = [
     name: "曲がり角右３",
     lat: 35.69386114596397,
     lon: 140.0510468829086,
-    radius: 15,
+    radius: 12,
     images: ["image5.jpeg", "image14.jpeg"],
     audio: { A: "spot5,6.ja.mp3", B: "spot5,6.en.mp3", C: "spot5,6.ch.mp3" }
   },
@@ -135,7 +135,7 @@ const spots = [
     name: "曲がり角右４",
     lat: 35.69339288645685,
     lon: 140.0510468829086,
-    radius: 15,
+    radius: 12,
     images: ["image6.jpeg", "image15.jpeg"],
     audio: { A: "spot5,6.ja.mp3", B: "spot5,6.en.mp3", C: "spot5,6.ch.mp3" }
   },
@@ -159,7 +159,7 @@ const spots = [
     name: "目的地",
     lat: 35.69285055749237,
     lon: 140.05080838028817,
-    radius: 10,
+    radius: 20,
     images: ["image9.jpeg", "image18.jpeg"],
     audio: { A: "spot9.ja.mp3", B: "spot9.en.mp3", C: "spot9.ch.mp3" }
   }
@@ -206,7 +206,11 @@ function checkProximity(lat, lon) {
   const distance = getDistance(lat, lon, spot.lat, spot.lon);
   const range = spot.radius || 10;
 
-  info.innerText = `現在地: 緯度 ${lat.toFixed(6)}, 経度 ${lon.toFixed(6)}\n次: ${spot.name}（残り${distance.toFixed(1)}m）`;
+ info.innerText =
+  `現在地: 緯度 ${lat.toFixed(6)}, 経度 ${lon.toFixed(6)}\n` +
+  `次のスポット: ${spot.name}（${currentIndex + 1} / ${spots.length}）\n` +
+  `残り距離: ${distance.toFixed(1)}m`;
+
 
   if (currentIndex >= 1 && !hasEnteredSpot && distance < range) {
     showSpot(spot);
