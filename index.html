@@ -83,7 +83,7 @@
 <div id="info">位置情報取得中...</div>
 <img id="image" src="" alt="スポット画像" />
 <button class="btn" id="playBtn" onclick="toggleAudio()">音声案内を再生</button>
-<button class="btn" id="patternBtn" onclick="switchPattern()">パターン: A に切替</button>
+<button class="btn" id="patternBtn" onclick="switchPattern()">English</button>
 <button class="btn" id="nextBtn" onclick="goToNextSpot()">このスポットは完了</button>
 <button class="img-nav" id="prevBtn" onclick="showPrevImage()" style="display:none;">←</button>
 <button class="img-nav" id="nextImgBtn" onclick="showNextImage()" style="display:none;">→</button>
@@ -96,7 +96,7 @@ const spots = [
     lat: 35.69304350697483,
     lon: 140.05084706907195,
     radius: 0,
-    images: ["image1.jpeg", "image1_b.jpeg", "image1_c.jpeg"],
+    images: ["image0.jpeg", "image1.jpeg"],
     audio: { A: "spot1.ja.mp3", B: "spot1.en.mp3", C: "spot1.ch.mp3" }
   },
   {
@@ -104,7 +104,7 @@ const spots = [
     lat: 35.693237099346376,
     lon: 140.0510123108731,
     radius: 15,
-    images: ["image2.jpeg", "image1_b.jpeg", "image1_c.jpeg"],
+    images: ["image2.jpeg", "image10.jpeg"],
     audio: { A: "spot2.ja.mp3", B: "spot2.en.mp3", C: "spot2.ch.mp3" }
   },
   {
@@ -112,7 +112,7 @@ const spots = [
     lat: 35.6933688901654,
     lon: 140.05042624826697,
     radius: 10,
-    images: ["image3.jpeg", "image1_b.jpeg", "image1_c.jpeg"],
+    images: ["image3.jpeg", "image11.jpeg"],
     audio: { A: "spot3,4.ja.mp3", B: "spot3,4.en.mp3", C: "spot3,4.ch.mp3" }
   },
   {
@@ -120,7 +120,7 @@ const spots = [
     lat: 35.69384574273443,
     lon: 140.05039255315654,
     radius: 10,
-    images: ["image4.jpeg", "image1_b.jpeg", "image1_c.jpeg"],
+    images: ["image4.jpeg", "image13.jpeg"],
     audio: { A: "spot3,4.ja.mp3", B: "spot3,4.en.mp3", C: "spot3,4.ch.mp3" }
   },
   {
@@ -128,7 +128,7 @@ const spots = [
     lat: 35.69386114596397,
     lon: 140.0510468829086,
     radius: 12,
-    images: ["image5.jpeg", "image1_b.jpeg", "image1_c.jpeg"],
+    images: ["image5.jpeg", "image14.jpeg"],
     audio: { A: "spot5,6.ja.mp3", B: "spot5,6.en.mp3", C: "spot5,6.ch.mp3" }
   },
   {
@@ -136,7 +136,7 @@ const spots = [
     lat: 35.69339288645685,
     lon: 140.0510468829086,
     radius: 12,
-    images: ["image6.jpeg", "image1_b.jpeg", "image1_c.jpeg"],
+    images: ["image6.jpeg", "image15.jpeg"],
     audio: { A: "spot5,6.ja.mp3", B: "spot5,6.en.mp3", C: "spot5,6.ch.mp3" }
   },
   {
@@ -144,7 +144,7 @@ const spots = [
     lat: 35.69337440247251,
     lon: 140.0504285887079,
     radius: 15,
-    images: ["image7.jpeg", "image1_b.jpeg", "image1_c.jpeg"],
+    images: ["image7.jpeg", "image16.jpeg"],
     audio: { A: "spot7,8.ja.mp3", B: "spot7,8.en.mp3", C: "spot7,8.ch.mp3" }
   },
   {
@@ -152,7 +152,7 @@ const spots = [
     lat: 35.692982445978856,
     lon: 140.0502512817421,
     radius: 15,
-    images: ["image8.jpeg", "image1_b.jpeg", "image1_c.jpeg"],
+    images: ["image8.jpeg", "image17.jpeg"],
     audio: { A: "spot7,8.ja.mp3", B: "spot7,8.en.mp3", C: "spot7,8.ch.mp3" }
   },
   {
@@ -160,7 +160,7 @@ const spots = [
     lat: 35.69285055749237,
     lon: 140.05080838028817,
     radius: 20,
-    images: ["image9.jpeg", "image1_b.jpeg", "image1_c.jpeg"],
+    images: ["image9.jpeg", "image18.jpeg"],
     audio: { A: "spot9.ja.mp3", B: "spot9.en.mp3", C: "spot9.ch.mp3" }
   }
 ];
@@ -288,7 +288,13 @@ function showNextImage() {
 }
 
 function updatePatternButtonText() {
-  patternBtn.innerText = `パターン: ${currentPattern} に切替`;
+  let label = "";
+  switch (currentPattern) {
+    case "A": label = "英語に切替"; break;
+    case "B": label = "中国語に切替"; break;
+    case "C": label = "日本語に切替"; break;
+  }
+  patternBtn.innerText = label;
 }
 
 function goToNextSpot() {
